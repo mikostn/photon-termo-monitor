@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+##
+#
+#
+appConfig.h
+*.bin
