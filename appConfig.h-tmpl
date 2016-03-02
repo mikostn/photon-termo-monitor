@@ -1,0 +1,10 @@
+#define WIFI_SSID "my wifi ssid"
+#define WIFI_PASS "my wifi passwd"
+
+IPAddress pingIp(192,168,1,1);
+IPAddress localThing(192,168,1,1);
+unsigned long thingChannelNumber = X;
+const char * thingWriteAPIKey = "T64QXUZWO9SASK";
+
+// Init Dallas on pin digital pin 3
+#define ONE_WIRE_BUS_PIN D3 //or any other
