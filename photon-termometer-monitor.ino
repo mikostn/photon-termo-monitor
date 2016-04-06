@@ -1,4 +1,20 @@
-#include "OneWire.h"
+/*
+ *******************************************************************************
+ **
+ ** Monitor multiple Dallas DS18*20 devices on small OneWire network, and push
+ ** data to exteranl service eg. ThingSpeak
+ **
+ **
+ ** Libs:
+ ** https://github.com/Hotaman/OneWireSpark
+ ** https://github.com/tomdeboer/SparkCoreDallasTemperature
+ ** https://github.com/mathworks/thingspeak-particle
+ **
+ **
+ **
+ **
+ ******************************************************************************/
+ #include "OneWire.h"
 #include "spark-dallas-temperature.h"
 #include "ThingSpeak.h"
 
@@ -27,7 +43,7 @@ STARTUP(WiFi.setCredentials(WIFI_SSID, WIFI_PASS));
   **** has more information. You need to change this to your channel, and your write API key
   **** IF YOU SHARE YOUR CODE WITH OTHERS, MAKE SURE YOU REMOVE YOUR WRITE API KEY!!
   *****************************************************************************************/
-TCPClient client;
+TCPClient thingSpeakClient;
 
 
 /*
@@ -91,7 +107,7 @@ void setup() {
       *****************************************************************************************
       **** Setup ThingSpeak communication
       ***************************************************************************************** */
-      ThingSpeak.begin(client, localThing, 3000);
+      ThingSpeak.begin(thingSpeakClient, thingSpeakServer, 3000);
 
 }
 

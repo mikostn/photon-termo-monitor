@@ -1,10 +1,25 @@
+#ifndef appConfig_h
+#define appConfig_h
+
+/*
+ *******************************************************************************
+ **
+ ** Temporary solution for device configuration
+ **
+ ******************************************************************************/
+
 #define WIFI_SSID "my wifi ssid"
 #define WIFI_PASS "my wifi passwd"
 
 IPAddress pingIp(192,168,1,1);
-IPAddress localThing(192,168,1,1);
+
+IPAddress thingSpeakServer(192,168,1,1);
 unsigned long thingChannelNumber = X;
 const char * thingWriteAPIKey = "T64QXUZWO9SASK";
+int rssiField = 0;
+int pingField = 0;
 
 // Init Dallas on pin digital pin 3
 #define ONE_WIRE_BUS_PIN D3 //or any other
+
+#endif //appConfig_h

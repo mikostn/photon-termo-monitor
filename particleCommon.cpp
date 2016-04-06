@@ -70,21 +70,21 @@ int getPhotonSSID(){
   return 1;
 }
 
-void getPhotonInfo(const char *topic, const char *data) {
-  String ant = String(antenna);
-
-  String netInfo = String::format("network:{ip:\"%s\", mac:\"%s\", SSID:\"%s\", BSSID:\"%s\", antenna:\"%s\"}", ipAddress, macAddress, SSID.c_str(), bssID, ant.c_str());
-
-  String devName = String(data);
-  
-  String chnr = String(myChannelNumber);
-  String rssi = String(rssiField);
-  String ping = String(pingField);
-  String devInfo = String::format("info:{ID:\"%s\", deviceName:\"%s\", chnr:\"%s\", rssiField:\"%s\", pingField:\"%s\"}", deviceID.c_str(), devName.c_str(), chnr.c_str(), rssi.c_str(), ping.c_str());
-
-  String infoData = String::format("{%s, %s}", devInfo.c_str(), netInfo.c_str());
-  Particle.publish("photonInfo", infoData, 60, PRIVATE);
-}
+// void getPhotonInfo(const char *topic, const char *data) {
+//   String ant = String(antenna);
+//
+//   String netInfo = String::format("network:{ip:\"%s\", mac:\"%s\", SSID:\"%s\", BSSID:\"%s\", antenna:\"%s\"}", ipAddress, macAddress, SSID.c_str(), bssID, ant.c_str());
+//
+//   String devName = String(data);
+//
+//   String chnr = String(thingChannelNumber);
+//   String rssi = String(rssiField);
+//   String ping = String(pingField);
+//   String devInfo = String::format("info:{ID:\"%s\", deviceName:\"%s\", chnr:\"%s\", rssiField:\"%s\", pingField:\"%s\"}", deviceID.c_str(), devName.c_str(), chnr.c_str(), rssi.c_str(), ping.c_str());
+//
+//   String infoData = String::format("{%s, %s}", devInfo.c_str(), netInfo.c_str());
+//   Particle.publish("photonInfo", infoData, 60, PRIVATE);
+// }
 
 // Open a serial terminal and see the device name printed out
 void photonsName(const char *topic, const char *data) {
