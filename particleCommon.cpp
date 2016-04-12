@@ -1,6 +1,7 @@
 #include "application.h"
 #include "particleCommon.h"
 
+//https://www.arduino.cc/en/Reference/For
 void blinkLed(int pin, int blinkTime, int blinks) {
   while(blinks){
     digitalWrite(pin, HIGH);
