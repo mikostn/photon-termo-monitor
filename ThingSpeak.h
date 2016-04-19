@@ -2,41 +2,41 @@
   ThingSpeak(TM) Communication Library For Arduino, ESP8266, and Particle
 
   Enables an Arduino or other compatible hardware to write or read data to or from ThingSpeak,
-  an open data platform for the Internet of Things with MATLAB analytics and visualization. 
+  an open data platform for the Internet of Things with MATLAB analytics and visualization.
 
   ThingSpeak ( https://www.thingspeak.com ) is a free IoT service for building
   systems that collect, analyze, and react to their environments.
-  
+
   Copyright 2016, The MathWorks, Inc.
- 
+
   See the accompaning licence file for licensing information.
 */
 
 /**
   @mainpage
- * 
+ *
  * \ref ThingSpeakClass "For technical documentation, visit this page"
- * 
+ *
  * ThingSpeak offers free data storage and analysis of time-stamped numeric or alphanumeric data.
  * Users can access ThingSpeak by visiting http://thingspeak.com and creating a ThingSpeak user account.
  *
- * ThingSpeak stores data in channels.  Channels support an unlimited number of timestamped observations (think of these as rows in a spreadsheet).  
+ * ThingSpeak stores data in channels.  Channels support an unlimited number of timestamped observations (think of these as rows in a spreadsheet).
  * Each channel has up to 8 fields (think of these as columns in a speadsheet).  Check out this <a href="http://www.mathworks.com/videos/introduction-to-thingspeak-107749.html">video</a> for an overview.
- * 
+ *
  * Channels may be public, where anyone can see the data, or private, where only the owner and select users can read the data.
- * Each channel has an associated Write API Key that is used to control who can write to a channel.  
- * In addition, private channels have one or more Read API Keys to control who can read from private channel.  
+ * Each channel has an associated Write API Key that is used to control who can write to a channel.
+ * In addition, private channels have one or more Read API Keys to control who can read from private channel.
  * An API Key is not required to read from public channels.  Each channel can have up to 8 fields. One field is created by default.
  *
  * You can visualize and do online analytics of your data on ThingSpeak using the built in version of MATLAB, or use the desktop version of MATLAB to get
  * deeper historical insight.  Visit https://www.mathworks.com/hardware-support/thingspeak.html to learn more.
- * 
+ *
  * <h3>Compatible Hardware</h3>
  * * <a href="http://www.arduino.cc">Arduino</a> or compatible using a wired or Wi-Fi ethernet shield (we have tested with <a href="http://www.arduino.cc/en/Main/ArduinoBoardUno">Uno</a> and <a href="http://www.arduino.cc/en/Main/ArduinoBoardMega2560">Mega</a>), should work with Arduino WiFi Shield 101
  * * <a href="http://www.arduino.cc/en/Main/ArduinoBoardYun">Arduino Yun</a> running OpenWRT-Yun Release 1.5.3 (November 13th, 2014) or later.  There are known issues with earlier versions.  Visit [this page](http://www.arduino.cc/en/Main/Software) to get the latest version.
  * * ESP8266 (tested with <a href="https://www.sparkfun.com/products/13711">SparkFun ESP8266 Thing - Dev Board</a> and <a href="http://www.seeedstudio.com/depot/NodeMCU-v2-Lua-based-ESP8266-development-kit-p-2415.html">NodeMCU 1.0 module</a>)
  * * Particle (Formally Spark) Core, <a href="https://www.particle.io/prototype#photon">Photon</a>, and <a href="https://www.particle.io/prototype#electron">Electron</a>
- * 
+ *
  * <h3>Examples</h3>
  * The library includes several examples to help you get started.  These are accessible in the Examples/ThingSpeak menu off the File menu in the Arduino IDE.
  * * <b>CheerLights:</b> Reads the latest <a href="http://www.cheerlights.com">CheerLights</a> color on ThingSpeak, and sets an RGB LED.
@@ -130,7 +130,7 @@
 #define ERR_NOT_INSERTED        -401    // Point was not inserted (most probable cause is the rate limit of once every 15 seconds)
 
 /**
- * @brief Enables an Arduino, ESP8266, Particle or other compatible hardware to write or read data to or from ThingSpeak, an open data platform for the Internet of Things with MATLAB analytics and visualization. 
+ * @brief Enables an Arduino, ESP8266, Particle or other compatible hardware to write or read data to or from ThingSpeak, an open data platform for the Internet of Things with MATLAB analytics and visualization.
  */
 class ThingSpeakClass
 {
@@ -237,7 +237,7 @@ class ThingSpeakClass
 		this->lastReadStatus = OK_SUCCESS;
 		return true;
 	};
-	
+
 	/**
 	 * @brief Write an integer value to a single field in a ThingSpeak channel
 	 * @param channelNumber Channel number
@@ -374,7 +374,7 @@ class ThingSpeakClass
 		if(field < FIELDNUM_MIN || field > FIELDNUM_MAX) return ERR_INVALID_FIELD_NUM;
 		// Max # bytes for ThingSpeak field is 255
 		if(value.length() > FIELDLENGTH_MAX) return ERR_OUT_OF_RANGE;
-		
+
 		#ifdef PRINT_DEBUG_MESSAGES
 		  #ifdef SPARK
             Particle.publish(SPARK_PUBLISH_TOPIC, "writeField (" + String(channelNumber) + ", " + String(writeAPIKey) + ", " + String(field) + ", " + String(value) + ")", SPARK_PUBLISH_TTL, PRIVATE);
@@ -386,7 +386,7 @@ class ThingSpeakClass
 		return writeRaw(channelNumber, postMessage, writeAPIKey);
  	};
 
-    
+
 	/**
 	 * @brief Set the value of a single field that will be part of a multi-field update.
 	 * To write multiple fields at once, call setField() for each of the fields you want to write, and then call writeFields()
@@ -426,7 +426,7 @@ class ThingSpeakClass
 #else
 		char valueString[10];  // int range is -32768 to 32768, so 7 bytes including terminator
 	    itoa(value, valueString, 10);
-		
+
 		return setField(field, valueString);
 #endif
 	};
@@ -514,7 +514,7 @@ class ThingSpeakClass
 	 * @brief Set the value of a single field that will be part of a multi-field update.
 	 * To write multiple fields at once, call setField() for each of the fields you want to write, and then call writeFields()
 	 * @param field Field number (1-8) within the channel to set
-	 * @param value String to write (UTF8).  ThingSpeak limits this to 255 bytes.  
+	 * @param value String to write (UTF8).  ThingSpeak limits this to 255 bytes.
 	 * @return HTTP status code of 200 if successful.  See getLastReadStatus() for other possible return values.
 	 * @see setLatitude(), setLongitude(), setElevation(), writeFields()
 	 * @code
@@ -892,7 +892,7 @@ class ThingSpeakClass
 		if(!this->client->print(postMessage.length())) return abortWriteRaw();
 		if(!this->client->print("\n\n")) return abortWriteRaw();
 		if(!this->client->print(postMessage)) return abortWriteRaw();
-  
+
 		String entryIDText = String();
 		int status = getHTTPResponse(entryIDText);
 		if(status != OK_SUCCESS)
@@ -907,7 +907,7 @@ class ThingSpeakClass
 		#endif
 
 		client->stop();
-		
+
 		#ifdef PRINT_DEBUG_MESSAGES
 			Serial.println("disconnected.");
 		#endif
@@ -918,7 +918,7 @@ class ThingSpeakClass
 		}
 		return status;
 	};
-	
+
 	/**
 	 * @brief Read the latest string from a private ThingSpeak channel
 	 * @param channelNumber Channel number
@@ -928,7 +928,7 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  String message = ThingSpeak.readStringField(myChannelNumber, 1, myReadAPIKey);
-		  Serial.print("Latest message is: "); 
+		  Serial.print("Latest message is: ");
 		  Serial.println(message);
 		  delay(30000);
 		}
@@ -942,7 +942,7 @@ class ThingSpeakClass
 			return("");
 		}
 		#ifdef PRINT_DEBUG_MESSAGES
-			Serial.print("ts::readStringField(channelNumber: "); Serial.print(channelNumber); 
+			Serial.print("ts::readStringField(channelNumber: "); Serial.print(channelNumber);
 			if(NULL != readAPIKey)
 			{
 				Serial.print(" readAPIKey: "); Serial.print(readAPIKey);
@@ -961,7 +961,7 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  String message = ThingSpeak.readStringField(myChannelNumber, 1);
-		  Serial.print("Latest message is: "); 
+		  Serial.print("Latest message is: ");
 		  Serial.println(message);
 		  delay(30000);
 		}
@@ -982,9 +982,9 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  float voltage = ThingSpeak.readFloatField(myChannelNumber, 1, myReadAPIKey);
-		  Serial.print("Latest voltage is: "); 
+		  Serial.print("Latest voltage is: ");
 		  Serial.print(voltage);
-		  Serial.println("V"); 
+		  Serial.println("V");
 		  delay(30000);
 		}
 	 * @endcode
@@ -1003,9 +1003,9 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  float voltage = ThingSpeak.readFloatField(myChannelNumber, 1);
-		  Serial.print("Latest voltage is: "); 
+		  Serial.print("Latest voltage is: ");
 		  Serial.print(voltage);
-		  Serial.println("V"); 
+		  Serial.println("V");
 		  delay(30000);
 		}
 	 * @endcode
@@ -1025,7 +1025,7 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  long value = ThingSpeak.readLongField(myChannelNumber, 1, myReadAPIKey);
-		  Serial.print("Latest value is: "); 
+		  Serial.print("Latest value is: ");
 		  Serial.print(value);
 		  delay(30000);
 		}
@@ -1046,7 +1046,7 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  long value = ThingSpeak.readLongField(myChannelNumber, 1);
-		  Serial.print("Latest value is: "); 
+		  Serial.print("Latest value is: ");
 		  Serial.print(value);
 		  delay(30000);
 		}
@@ -1068,7 +1068,7 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  int value = ThingSpeak.readIntField(myChannelNumber, 1, myReadAPIKey);
-		  Serial.print("Latest value is: "); 
+		  Serial.print("Latest value is: ");
 		  Serial.print(value);
 		  delay(30000);
 		}
@@ -1089,7 +1089,7 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  int value = ThingSpeak.readIntField(myChannelNumber, 1);
-		  Serial.print("Latest value is: "); 
+		  Serial.print("Latest value is: ");
 		  Serial.print(value);
 		  delay(30000);
 		}
@@ -1099,7 +1099,7 @@ class ThingSpeakClass
 	{
 		return readLongField(channelNumber, field, NULL);
 	};
-	
+
 	/**
 	 * @brief Read a raw response from a public ThingSpeak channel
 	 * @param channelNumber Channel number
@@ -1109,7 +1109,7 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  String response = ThingSpeak.readRaw(myChannelNumber, String("feeds/days=1"));
-		  Serial.print("Response: "); 
+		  Serial.print("Response: ");
 		  Serial.print(response);
 		  delay(30000);
 		}
@@ -1119,7 +1119,7 @@ class ThingSpeakClass
 	{
 		return readRaw(channelNumber, URLSuffix, NULL);
 	}
-	
+
 	/**
 	 * @brief Read a raw response from a private ThingSpeak channel
 	 * @param channelNumber Channel number
@@ -1130,7 +1130,7 @@ class ThingSpeakClass
 	 * @code
 		void loop() {
 		  String response = ThingSpeak.readRaw(myChannelNumber, String("feeds/days=1"), myReadAPIKey);
-		  Serial.print("Response: "); 
+		  Serial.print("Response: ");
 		  Serial.print(response);
 		  delay(30000);
 		}
@@ -1165,7 +1165,7 @@ class ThingSpeakClass
 		if(!this->client->print(" HTTP/1.1\n")) return abortReadRaw();
 		if(!writeHTTPHeader(readAPIKey)) return abortReadRaw();
 		if(!this->client->print("\n")) return abortReadRaw();
- 
+
 		String content = String();
 		int status = getHTTPResponse(content);
 		this->lastReadStatus = status;
@@ -1192,7 +1192,7 @@ class ThingSpeakClass
         // This is a workaround to a bug in the Spark implementation of String
     	return String("") + content;
 	};
-	
+
 	/**
 	 * @brief Get the status of the previous read.
 	 * @return Generally, these are HTTP status codes.  Negative values indicate an error generated by the library.
@@ -1214,12 +1214,12 @@ class ThingSpeakClass
 		  int resultCode = ThingSpeak.getLastReadStatus();
 		  if(resultCode == 200)
 		  {
-			  Serial.print("Latest message is: "); 
+			  Serial.print("Latest message is: ");
 			  Serial.println(message);
 		  }
 		  else
 		  {
-			  Serial.print("Error reading message.  Status was: "); 
+			  Serial.print("Error reading message.  Status was: ");
 			  Serial.println(resultCode);
 		  }
 		  delay(30000);

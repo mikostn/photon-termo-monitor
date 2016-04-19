@@ -1,8 +1,6 @@
 #ifndef particleCommon_h
 #define particleCommon_h
 
-#define DEBUG 1
-
 char *ipAddress;
 
 int BLUE = D7;
